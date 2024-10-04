@@ -1,0 +1,9 @@
+npm run +
+1) "serve": "webpack serve --env mode=development",
+runs autoupdated server with dev mode
+
+2) "build:dev": "webpack --env mode=development",
+builds app with dev mode
+
+3) "build:prod": "webpack --env mode=production"
+builds app with prod mode
