@@ -1,3 +1,4 @@
+To start app, type:
 npm run +
 1) "serve": "webpack serve --env mode=development",
 runs autoupdated server with dev mode
