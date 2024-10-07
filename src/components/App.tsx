@@ -11,7 +11,7 @@ export const App = () => {
         <div>
             Hello world
             <h1>{count}</h1>
-            <button onClick={increment}><span>inc</span></button>
+            <button onClick={increment}><span>Increment</span></button>
         </div>
     )
 }
