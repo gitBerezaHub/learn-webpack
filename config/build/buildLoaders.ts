@@ -2,10 +2,25 @@ import {ModuleOptions} from 'webpack'
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import {BuildOptions} from "./types/types";
 import ReactRefreshPlugin from "@pmmmwh/react-refresh-webpack-plugin";
+import {removeDataTestIdBabelPlugin} from "./babel/removeDataTestIdBabelPlugin";
 
 export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
     const isProd = options.mode === 'production'
     const isDev = options.mode === 'development'
+
+    const plugins = []
+
+    if (isProd) {
+        plugins.push([
+            [
+                removeDataTestIdBabelPlugin,
+                {
+                    props: ['data-testid']
+                }
+            ]
+        ])
+    }
+
 
     const assetLoader = {
         test: /\.(png|jpg|jpeg|gif)$/i,
@@ -66,10 +81,29 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
         }
     }
 
+    const babelLoader = {
+        test: /\.tsx?$/,
+        exclude: /node-modules/,
+        use: {
+            loader: 'babel-loader',
+            options: {
+                presets: [
+                    '@babel/preset-env',
+                    '@babel/preset-typescript',
+                    ['@babel/preset-react', {
+                        runtime: isDev ? 'automatic' : 'classic'
+                    }]
+                ],
+                plugins: plugins.length ? plugins : undefined
+            }
+        }
+    }
+
     return [
         svgrLoader,
         assetLoader,
         scssLoader,
-        tsLoader
+        // tsLoader
+        babelLoader
     ]
 }

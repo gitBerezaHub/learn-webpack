@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunklearn_webpack=self.webpackChunklearn_webpack||[]).push([[532],{532:(e,n,a)=>{a.r(n),a.d(n,{default:()=>r});var c=a(848);a(540);const r=function(){return(0,c.jsx)("h1",{children:"SHOP"})}}}]);
