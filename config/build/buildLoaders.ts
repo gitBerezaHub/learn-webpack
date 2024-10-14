@@ -6,6 +6,33 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
     const isProd = options.mode === 'production'
     const isDev = options.mode === 'development'
 
+    const assetLoader = {
+        test: /\.(png|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+    }
+
+    const svgrLoader = {
+        test: /\.svg$/,
+        use: [
+            {
+                loader: '@svgr/webpack',
+                options: {
+                    icon: true,
+                    svgoConfig: {
+                        plugins: [
+                            {
+                                name: 'convertColors',
+                                params: {
+                                    currentColor: true,
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        ],
+    }
+
     const cssLoaderWithModules = {
         loader: 'css-loader',
         options: {
@@ -31,6 +58,8 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
     }
 
     return [
+        svgrLoader,
+        assetLoader,
         scssLoader,
         tsLoader
     ]
