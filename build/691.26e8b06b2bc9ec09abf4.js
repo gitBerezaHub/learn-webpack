@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunklearn_webpack=self.webpackChunklearn_webpack||[]).push([[691],{691:(e,n,a)=>{a.r(n),a.d(n,{default:()=>l});var c=a(540);const l=function(){return c.createElement("h1",null,"SHOP")}}}]);
